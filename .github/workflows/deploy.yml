@@ -20,7 +20,7 @@ jobs:
           echo "$EC2_SSH_KEY" > key.pem
           chmod 600 key.pem
           
-          # auto renew ssl certificate
+          # Copy SSL renewal files to server
           scp -i key.pem -o StrictHostKeyChecking=no \
             renew-ssl.sh \
             install-ssl-renewal.sh \
@@ -28,24 +28,41 @@ jobs:
             ssl-renewal.timer \
             ec2-user@18.209.196.27:~/
           
+          # Copy html/httpd directory to server
+          scp -i key.pem -o StrictHostKeyChecking=no -r \
+            html/* \
+            ec2-user@18.209.196.27:/tmp/html-deploy/
+          scp -i key.pem -o StrictHostKeyChecking=no -r \
+            httpd/* \
+            ec2-user@18.209.196.27:/tmp/httpd-deploy/
+          
           ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@18.209.196.27 <<'DEPLOY_EOF'
             # Deploy website files
-            cd /var/www/html
-            git pull origin main
-            sudo find . -type d -exec chmod 777 {} \;
-            sudo find . -type f -exec chmod 666 {} \;
-            sudo chown -R apache:apache .
+            sudo rsync -av --delete /tmp/html-deploy/ /var/www/html/
+            sudo find /var/www/html -type d -exec chmod 777 {} \;
+            sudo find /var/www/html -type f -exec chmod 666 {} \;
+            sudo chown -R apache:apache /var/www/html
+            sudo rm -rf /tmp/html-deploy
             
+            # Deploy httpd config
+            sudo rsync -av /tmp/httpd-deploy/conf/ /etc/httpd/conf/
+            sudo rsync -av /tmp/httpd-deploy/conf.d/ /etc/httpd/conf.d/
+            sudo rsync -av /tmp/httpd-deploy/conf.modules.d/ /etc/httpd/conf.modules.d/
+            sudo rm -rf /tmp/httpd-deploy
+            
+            sudo systemctl reload httpd || sudo systemctl restart httpd
+            
+            # Set up SSL renewal files
             cd ~
             chmod +x renew-ssl.sh install-ssl-renewal.sh
             
-            # systemd service and timer
+            # Install systemd service and timer
             sudo cp ssl-renewal.service /etc/systemd/system/
             sudo cp ssl-renewal.timer /etc/systemd/system/
 
             sudo systemctl daemon-reload
             sudo systemctl enable ssl-renewal.timer
-            sudo systemctl start ssl-renewal.timer || true  # Don't fail if already running
+            sudo systemctl start ssl-renewal.timer || true
             echo "SSL renewal timer status:"
             sudo systemctl status ssl-renewal.timer --no-pager -l || true
             echo ""
