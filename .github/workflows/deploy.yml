@@ -31,7 +31,7 @@ jobs:
           ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@18.209.196.27 'mkdir -p /tmp/html-deploy /tmp/httpd-deploy'
           rsync -avz -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
             html/ ec2-user@18.209.196.27:/tmp/html-deploy/
-          rsync -avz -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
+          rsync -avz --exclude='modules/' -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
             httpd/ ec2-user@18.209.196.27:/tmp/httpd-deploy/
           ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@18.209.196.27 <<'DEPLOY_EOF'
             # Deploy website files
