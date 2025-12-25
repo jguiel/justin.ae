@@ -2,7 +2,7 @@ RewriteEngine On
 RewriteBase /
 
 RewriteRule ^home/?$ /home.html [L]
-RewriteRule ^analog_photography/?$ /analog_photography.html [L]
+RewriteRule ^analog/?$ /analog.html [L]
 RewriteRule ^photography/?$ /photography.html [L]
 RewriteRule ^infrared/?$ /infrared.html [L]
 RewriteRule ^scripts/?$ /scripts.html [L]
