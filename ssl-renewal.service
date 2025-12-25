@@ -1,0 +1,11 @@
+[Unit]
+Description=SSL Certificate Renewal for justin.ae
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/ec2-user/renew-ssl.sh
+StandardOutput=append:/var/log/ssl-renewal.log
+StandardError=append:/var/log/ssl-renewal.log
+User=root
+

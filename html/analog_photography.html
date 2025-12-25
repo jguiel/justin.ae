@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@jg.phtg</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function loadTemplate() {
+            fetch('template.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML = data;
+                    // Page content
+                    const mainContent = document.getElementById('main-content');
+                    mainContent.innerHTML = `
+                        <h1 class="title">35mm Photography<span class="cursor">█</span></h1>
+                        <p class="summary">@jg.phtg on instagram.<br>Select film photographs by way of Canon AE-1 and various point & shoot cameras. I like to buy busted film cameras at estate sales and repair them.</p>
+                        <div class="photo-grid">
+                            
+                            <a href="phtg/haight_skaters.jpg">
+                                <img src="phtg/haight_skaters.jpg" alt="skaters_film">
+                            </a>
+                            <a href="phtg/haight_skaters_2.jpg">
+                                <img src="phtg/haight_skaters_2.jpg" alt="skaters2_film">
+                            </a>
+                            <a href="phtg/haight_skater_3.jpg">
+                                <img src="phtg/haight_skaters_3.jpg" alt="skaters3_film">
+                            </a>
+                            <a href="phtg/haight_skater_4.jpg">
+                                <img src="phtg/haight_skaters_4.jpg" alt="skaters4_film">
+                            </a>
+                            <a href="phtg/mccc_bench.jpg">
+                                <img src="phtg/mccc_bench.jpg" alt="mccc_bench">
+                            </a>
+                            <a href="phtg/mccc_chair.jpg">
+                                <img src="phtg/mccc_chair.jpg" alt="mccc_chair">
+                            </a>
+                            <a href="phtg/jtown_birds.jpg">
+                                <img src="phtg/jtown_birds.jpg" alt="jtown_birds">
+                            </a>
+                            <a href="phtg/jtown_church.jpg">
+                                <img src="phtg/jtown_church.jpg" alt="jtown_church">
+                            </a>
+                            <a href="phtg/kiss.jpg">
+                            <img src="phtg/kiss.jpg" alt="kiss">
+                            </a>
+                            <a href="phtg/leif_erikson.png">
+                                <img src="phtg/leif_erikson.png" alt="leif_erikson">
+                            </a>
+                            <a href="phtg/dog_in_a_window_film.png">
+                                <img src="phtg/dog_in_a_window_film.png" alt="dog_in_a_window_film">
+                            </a>
+                            <a href="phtg/chameleon_vintage.png">
+                                <img src="phtg/chameleon_vintage.png" alt="chameleon_vintage">
+                            </a>
+                            <a href="phtg/doggie_diner.jpg">
+                                <img src="phtg/doggie_diner.jpg" alt="doggie_diner_film">
+                            </a>
+                            <a href="phtg/big_sur_coast_2_film.png">
+                                <img src="phtg/big_sur_coast_2_film.png" alt="big_sur_coast_2_film">
+                            </a>
+                            <a href="phtg/greenhouse.jpg">
+                                <img src="phtg/greenhouse.jpg" alt="greenhouse">
+                            </a>
+                            <a href="phtg/point_sur_cow_film.png">
+                                <img src="phtg/point_sur_cow_film.png" alt="point_sur_cow_film">
+                            </a>
+                            <a href="phtg/nopales_and_prickly_pear_film.png">
+                                <img src="phtg/nopales_and_prickly_pear_film.png" alt="nopales_and_prickly_pear_film">
+                            </a>
+                            <a href="phtg/author_film.png">
+                                <img src="phtg/author_film.png" alt="author_film">
+                            </a>
+                            <a href="phtg/statest_grid.png">
+                                <img src="phtg/statest_grid.png" alt="statest_grid">
+                            </a>
+                            <a href="phtg/wife_applies_mascara_film.png">
+                                <img src="phtg/wife_applies_mascara_film.png" alt="wife_applies_mascara_film">
+                            </a>
+                            <a href="phtg/sutro_film.png">
+                                <img src="phtg/sutro_film.png" alt="sutro_film">
+                            </a>
+                            <a href="phtg/mt_olympus_stairs.jpg">
+                            <img src="phtg/mt_olympus_stairs.jpg" alt="olympus_stairs_film">
+                            </a>
+                            <a href="phtg/dolores_clouds_film.png">
+                                <img src="phtg/dolores_clouds_film.png" alt="dolores_clouds_film">
+                            </a>
+                            <a href="phtg/carousel.jpg">
+                                <img src="phtg/carousel.jpg" alt="carousel">
+                            </a>
+                        </div>
+                        <div class="links">
+                            <a href="https://www.tiktok.com/@bigonbiology" target="_blank">TikTok</a>
+                            <a href="https://www.instagram.com/jg.phtg" target="_blank">Insta</a>
+                            <a href="https://www.linkedin.com/in/justinguiel" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/jguiel" target="_blank">GitHub</a>
+                        </div>
+                    `;
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+
+        window.onload = loadTemplate;
+    </script>
+</head>
+<body>
+</body>
+</html>
