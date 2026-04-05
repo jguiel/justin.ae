@@ -60,7 +60,6 @@ Photos are organized into three folders under `html/`, one per gallery page:
 
 | Folder | Page |
 |---|---|
-| `digi_phtg/` | Digital Photography |
 | `film_phtg/` | 35mm Film Photography |
 | `ir_phtg/` | Infrared Photography |
 | `paid_phtg/` | Hire Me (engagements, concerts, photoshoots) |
