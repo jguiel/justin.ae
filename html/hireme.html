@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@jg.phtg | Paid Work</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="photo-loader.js"></script>
+    <script>
+        function loadTemplate() {
+            fetch('template.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML = data;
+                    const mainContent = document.getElementById('main-content');
+                    mainContent.innerHTML = `
+                        <h1 class="title">Hire Me<span class="cursor">█</span></h1>
+                        <p class="summary">I'll shoot your engagement, your elopement, your band's show, or just a random photoshoot to make you look good.<br>For booking, reach out via email at me@justin.ae or on <a href="https://www.instagram.com/jg.phtg" target="_blank">Instagram</a>.</p>
+                        <div class="photo-grid"></div>
+                        <div class="links">
+                            <a href="https://www.instagram.com/jg.phtg" target="_blank">Insta</a>
+                            <a href="https://www.linkedin.com/in/justinguiel" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/jguiel" target="_blank">GitHub</a>
+                        </div>
+                    `;
+                    loadPhotoGrid('paid_phtg');
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+
+        window.onload = loadTemplate;
+    </script>
+</head>
+<body>
+</body>
+</html>

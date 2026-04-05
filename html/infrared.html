@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>infrared photography</title>
     <link rel="stylesheet" href="style.css">
+    <script src="photo-loader.js"></script>
     <script>
         function loadTemplate() {
             fetch('template.html')
                 .then(response => response.text())
                 .then(data => {
                     document.body.innerHTML = data;
-                    // Page content
                     const mainContent = document.getElementById('main-content');
                     mainContent.innerHTML = `
                         <h1 class="title">Modded for IR<span class="cursor">█</span></h1>
@@ -39,68 +39,14 @@
                             <br>
                             <br>
                         </p>
-                        <div class="photo-grid">
-                            <a href="phtg/ir_camera.png">
-                                <img src="phtg/ir_camera.png" alt="ir_camera">
-                            </a>
-                            <a href="phtg/ir_comparison.png">
-                                <img src="phtg/ir_comparison.png" alt="ir_comparison">
-                            </a>
-                            <a href="phtg/ir_field.png">
-                                <img src="phtg/ir_field.png" alt="field">
-                            </a>
-                            <a href="phtg/ir_scene.png">
-                                <img src="phtg/ir_scene.png" alt="scene">
-                            </a>
-                            <a href="phtg/ir_crowns.png">
-                                <img src="phtg/ir_crowns.png" alt="crowns">
-                            </a>
-                            <a href="phtg/ir_willow.png">
-                                <img src="phtg/ir_willow.png" alt="willow">
-                            </a>
-                            <a href="phtg/ir_joshua.png">
-                                <img src="phtg/ir_joshua.png" alt="joshua">
-                            </a>
-                            <a href="phtg/ir_branches.png">
-                                <img src="phtg/ir_branches.png" alt="branches">
-                            </a>
-                            <a href="phtg/ir_gateway.png">
-                                <img src="phtg/ir_gateway.png" alt="gateway">
-                            </a>
-                            <a href="phtg/ir_park.png">
-                                <img src="phtg/ir_park.png" alt="park">
-                            </a>
-                            <a href="phtg/ir_leg.png">
-                                <img src="phtg/ir_leg.png" alt="leg">
-                            </a>
-                            <a href="phtg/ir_bamboo.png">
-                                <img src="phtg/ir_bamboo.png" alt="bamboo">
-                            </a>
-                            <a href="phtg/ir_walk.png">
-                                <img src="phtg/ir_walk.png" alt="walk">
-                            </a>
-                            <a href="phtg/ir_palm.png">
-                                <img src="phtg/ir_palm.png" alt="palm">
-                            </a>
-                            <a href="phtg/ir_home.png">
-                                <img src="phtg/ir_home.png" alt="home">
-                            </a>
-                            <a href="phtg/ir_street.png">
-                                <img src="phtg/ir_street.png" alt="street">
-                            </a>
-                            <a href="phtg/ir_buenavista.png">
-                                <img src="phtg/ir_buenavista.png" alt="buenavista">
-                            </a>
-                            <a href="phtg/ir_neighbors.png">
-                                <img src="phtg/ir_neighbors.png" alt="neighbors">
-                            </a>
-                        </div>
+                        <div class="photo-grid"></div>
                         <div class="links">
                             <a href="https://www.instagram.com/jg.phtg" target="_blank">Insta</a>
                             <a href="https://www.linkedin.com/in/justinguiel" target="_blank">LinkedIn</a>
                             <a href="https://github.com/jguiel" target="_blank">GitHub</a>
                         </div>
                     `;
+                    loadPhotoGrid('ir_phtg');
                 })
                 .catch(error => console.error('Error loading template:', error));
         }

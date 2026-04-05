@@ -18,16 +18,17 @@ body, h1, h2, p, ul, li  {
 }
 
 .photo-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     margin: 0 auto;
-    max-width: 1400px; /* max width */
+    max-width: 1400px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
     gap: 20px;
     width: 100%;
+}
+
+.photo-grid a.landscape {
+    grid-column: span 2;
 }
 
 /* img style */
