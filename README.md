@@ -56,26 +56,32 @@ python3 -m http.server 8000 --bind 0.0.0.0 --directory html
 
 ## Adding Photos
 
-Photos are organized into three folders under `html/`, one per gallery page:
+Photos live on the server at `/home/ec2-user/phtg/`, outside the web root, so they are **not affected by deploys**. Apache Alias directives in `justin.ae.conf` map the URL paths to this directory.
 
-| Folder | Page |
+| Folder (server) | Page |
 |---|---|
-| `film_phtg/` | 35mm Film Photography |
-| `ir_phtg/` | Infrared Photography |
-| `paid_phtg/` | Hire Me (engagements, concerts, photoshoots) |
+| `phtg/film_phtg/` | 35mm Film Photography |
+| `phtg/ir_phtg/` | Infrared Photography |
+| `phtg/paid_phtg/` | Hire Me (engagements, concerts, photoshoots) |
 
 The gallery pages dynamically discover images from their folder via Apache directory listing — no HTML editing required.
 
 ### Steps to add photos
 
-1. Drop image files (jpg, png, webp) into the appropriate folder
-2. Generate thumbnails:
+1. Drop image files (jpg, png, webp) into the appropriate folder on the server at `/home/ec2-user/phtg/`
+2. Generate thumbnails on the server:
 
 ```bash
-./generate_thumbs.sh html/film_phtg html/digi_phtg html/ir_phtg html/paid_phtg
+./generate_thumbs.sh /home/ec2-user/phtg/film_phtg /home/ec2-user/phtg/ir_phtg /home/ec2-user/phtg/paid_phtg
 ```
 
 This creates 800px-wide thumbnails in a `thumbs/` subfolder within each directory. The script skips photos that already have a thumbnail, so it's safe to re-run.
 
-3. The gallery grid uses thumbnails for display and links to the full-resolution originals on click
-4. Landscape images automatically span the full grid width; portrait images display side-by-side in two columns
+To upload photos from your local machine:
+
+```bash
+scp -r -i ~/.ssh/justin-ae-freetier.pem <local_folder> ec2-user@18.209.196.27:/home/ec2-user/phtg/
+```
+
+4. The gallery grid uses thumbnails for display and links to the full-resolution originals on click
+5. Landscape images automatically span the full grid width; portrait images display side-by-side in two columns

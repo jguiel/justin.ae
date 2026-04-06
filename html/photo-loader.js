@@ -1,4 +1,4 @@
-async function loadPhotoGrid(folder) {
+async function loadPhotoGrid(folder, { shuffle = false } = {}) {
     try {
         const response = await fetch(`${folder}/`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -10,6 +10,13 @@ async function loadPhotoGrid(folder) {
         const photos = Array.from(doc.querySelectorAll('a[href]'))
             .map(a => a.getAttribute('href'))
             .filter(href => imagePattern.test(href));
+
+        if (shuffle) {
+            for (let i = photos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [photos[i], photos[j]] = [photos[j], photos[i]];
+            }
+        }
 
         const grid = document.querySelector('.photo-grid');
         photos.forEach(file => {
